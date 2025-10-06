@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="짧은 기록들" />
+    <title>마이크로블로그</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <display_title>
+  <center>
+  마이크로블로그
+  </center>
+  </display_title>
+    <nav>
+  <script>
+        fetch('../nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('afterbegin', data);
+                });
+        </script>
+  </nav>
+  <div class="container">
+<h1 id="년-2025년-4월-마이크로블로그">2025년 4월</h1>
+<h2 id="년-4월-10일">2025년 4월 10일</h2>
+<p><a href="https://www.oneusefulthing.org/p/no-elephants-breakthroughs-in-image">Get guacamole delievered by drone.</a></p>
+<h1 id="년-12월-마이크로블로그">2024년 12월</h1>
+<h2 id="년-12월-28일">2024년 12월 28일</h2>
+    <figure>
+        <img src="https://images.squarespace-cdn.com/content/v1/5565349be4b0c8f29264bc8e/1684172597379-FIO1FMXM5F10RL1D3N9C/NASA+PRO.JPG?format=1000w" 
+             alt="NASA PRO Image" style="max-width:100%; height:auto;">
+        <figcaption>
+            "NASA" HD Hook Strap™ PRO - Stainless Steel - Elastic Watch Band
+        </figcaption>
+    </figure>
+<p><a href="https://nickmankeydesigns.com/shop/custom-nasa-pro-hook-strap#more-info">Nick Mankey Designs의 손목시계 “후크 스트랩"</a>은 내가 본 것 중 가장 예쁜 스트랩이다. 거기에 NASA와 콜라보까지… 다음 달 월급 중 일부는 여기로 사라지겠구나. ㅜㅜ</p>
+</body>
+  </div>
+    <br><br>
+    <footer>
+        <script>
+            fetch('../footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('beforeend', data);
+                });
+        </script>
+    </footer>
+</html>

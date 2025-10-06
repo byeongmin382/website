@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="피자를 사랑하는 상상가의 일기장입니다. 일상, 기술, 비디오게임에 관한 블로그." />
+    <title>병민의 하루</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <display_title>
+  <br>
+  <center>
+  &#128221; 병민의 하루
+  </center>
+  </display_title>
+  <nav>
+  <script>
+        fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('afterbegin', data);
+                });
+        </script>
+  </nav>
+  <div class="container">
+  <body>
+    <h1>안녕하세요!&#128075;</h1>
+    <center>
+    <p>같이 피자 한 판 어때요? &#129392;</p>
+    </center>
+    <h2>자기소개 &#128483;</h2>
+    <p>피자, 비디오 게임, 그리고 기술을 좋아하는 풀스택 상상가 &#127829; &#127918; &#128187; &#127939;</p>
+    <ul>
+    <li>이름: 고병민 (KO BYEONGMIN)
+    <ul>
+      <li>Family name: KO</li>
+      <li>Given/Preferred name: BYEONGMIN</li>
+    </ul></li><br>
+    <li>이메일: <a href=”mailto:ko@kobm.xyz”>ko@kobm.xyz</a></li>
+    </ul>
+    <h2>최근 발행된 글 &#128221;</h2>
+      <ul>
+        <li><a href=https://kobm.xyz/%EC%83%9D%EA%B0%81/241225_nespresso_thoughts>네스프레소에 대한 단상 (2024-12-25)</a></li>
+        <li><a href=https://kobm.xyz/%EC%97%AC%ED%96%89%EA%B3%BC_%EC%8B%9D%EB%8F%84%EB%9D%BD/241223_tacorice>타코라이스 (2024-12-23)</a></li>
+      </ul>
+    그리고 제 <a href=https://kobm.xyz/microblog/microblog>마이크로블로그</a>에도 짧은 글을 자주 적습니다.
+    <h2>공사 중! &#128679;</h2>
+    <center>
+    <img src=/badges/construction.gif alt="언제나 공사중"><br>
+    <img src=https://media.tenor.com/42bcTn0iuVgAAAAi/under-construction-pikachu.gif alt="페이지 공사중">
+    <p>페이지가 아직 공사 중입니다! 페이지에 게시될 많은 콘텐츠를 기대해주세요...</p>
+    </center>
+    <h3>To-Do List</h3>
+    <ul><li>모바일 친화적 Footer</li></ul>
+  </body>
+  </div>
+    <br><br>
+    <footer>
+        <script>
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('beforeend', data);
+                });
+        </script>
+    </footer>
+</html>

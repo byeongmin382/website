@@ -1,0 +1,82 @@
+@font-face {
+    font-family: neodgm;
+    src: url('/fonts/neodgm.woff2') format('woff2'),
+         url('/fonts/neodgm.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #fefee1;
+    color: black;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.container {
+    max-width: 800px; /* Constrain width for better readability */
+    margin: 0 auto; /* Center the container */
+    padding: 0 1em; /* Add padding to the sides for spacing */
+}
+
+h1, h2 {
+    background-color: #fefee1;
+    color: black;
+    font-family: "neodgm", sans-serif;
+    margin: 1em 0; /* Consistent vertical spacing */
+    padding: 0.2em; /* Adds a bit of inner spacing */
+    text-align: center;
+}
+
+p {
+    margin: 1em 0; /* Consistent vertical spacing */
+    padding: 0.2em; /* Adds a bit of inner spacing */
+}
+
+h2_sidebar {
+    color: black;
+    font-family: "neodgm", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+    margin: 0; /* Align with container */
+}
+
+footer {
+    text-align: center;
+    background-color: #e1e1fe;
+    color: grey;
+    padding: 5px 0;
+    /*position: fixed;*/
+    bottom: 0;
+    width: 100%;
+    font-family: "neodgm", sans-serif;
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.0;
+}
+
+display_title {
+    font-family: "neodgm", sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 1em 0; /* Consistent spacing with headings */
+}
+
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.5em; /* Adjust font size for smaller screens */
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 8px 0;
+    }
+
+    body {
+        line-height: 1.4;
+    }
+}
