@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="POST_DESCRIPTION">
+    <title>병민의 하루: POST_TITLE</title>
+    <!-- If your post lives directly under public/ (not a subfolder), change to ./style.css -->
+    <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <display_title>
+  <center>
+  POST_DISPLAY_TITLE
+  </center>
+  </display_title>
+    <nav>
+      <script>
+        // If your post lives directly under public/, change path to './nav.html'
+        fetch('../nav.html')
+          .then(response => response.text())
+          .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+          });
+      </script>
+    </nav>
+    <div class="container">
+      <!-- 본문 시작 -->
+      <p><strong>첫</strong> 문단을 여기에 작성하세요.</p>
+
+      <!-- 선택 사항: 이미지와 캡션 예시 -->
+      <!--
+      <figure>
+        <img src="./pics/IMAGE_FILE" title="IMAGE_TITLE" alt="IMAGE_ALT" />
+        <figcaption aria-hidden="true">IMAGE_CAPTION</figcaption>
+      </figure>
+      -->
+    </div>
+    <br><br>
+    <footer>
+      <script>
+        // If your post lives directly under public/, change path to './footer.html'
+        fetch('../footer.html')
+          .then(response => response.text())
+          .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+          });
+      </script>
+    </footer>
+  </body>
+</html>
+
+
