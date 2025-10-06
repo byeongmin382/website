@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="POST_DESCRIPTION">
+    <title>병민의 하루: 맥 미니 M4를 사용하며</title>
+    <!-- If your post lives directly under public/ (not a subfolder), change to ./style.css -->
+    <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <display_title>
+  <center>
+  POST_DISPLAY_TITLE
+  </center>
+  </display_title>
+    <nav>
+      <script>
+        // If your post lives directly under public/, change path to './nav.html'
+        fetch('../nav.html')
+          .then(response => response.text())
+          .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+          });
+      </script>
+    </nav>
+    <div class="container">
+      <!-- 본문 시작 -->
+      <p>macOS와의 첫 만남은 내가 중학교 3학년 때였다. 고등학교 진학을 앞두고 부모님을 졸라 i5가 탑재된 맥북 에어를 구매했었는데
+        배송이 오던 날 두근거리는 마음으로 상자를 개봉했던 기억이 난다. 그때 구매했던 맥북은 대학교 1학년 때까지 잘 사용했었지만,
+        시간이 지나며 성능이 점차 느려졌던 탓에 Dell XPS 15로 갈아탔었다. 그 뒤 다양한 리눅스 및 윈도우 기반 컴퓨터를 사용하는 동안
+        macOS에 대한 내 관심은 옅어졌다. 
+      </p>
+
+        그랬던 내가 애플의 컴퓨터에 대해 다시 관심을 갖게 된 것은 지난 2025년 6월의 이직이었다. 이직한 회사에서는 업무용 컴퓨터로
+        맥북 에어 M2를 제공했는데, 내가 마지막으로 기억하던 macOS보다 사용자 경험이 훨씬 깔끔했었다. 소프트웨어의 발전도 적지 않은 영향을
+        미쳤겠지만, 아마도 애플 실리콘 기반의 새 CPU가 컴퓨터의 속도를 더욱 빠르게 만들었을 것이다. 2025년 6월 기준 M2는 발매된지 3년 가량
+        된 구형 CPU였지만, 그럼에도 불구하고 내 업무를 말 그대로 빠릿빠릿하게 처리해줬다.
+      </p>
+      <p>
+        내 업무가 영상 편집처럼 많은 자원을 요구하진 않지만, 그럼에도 불구하고 여러 개의 웹 브라우저 탭, Zoom, 그리고 Cursor 등을 동시에
+        띄우는 등 메모리 차원에서 부담스러운 일인데, 이 모든 업무를 정말 조금의 렉도 없이 척척 처리해주는 컴퓨터를 사용하는 것은 정말 기분 좋은
+        일이었다. 그렇기 때문에 집에서도 애플 실리콘 CPU를 쓰는 컴퓨터를 구매하기로 결심하였다. 다시금 macOS를 사용할 시간이 된 것이다.
+      </p>
+      <p>
+        맥북은 이미 회사에서 준 것이 있으니 집에서는 데스크탑 맥을 구매하기로 했다. 내가 구매할만한 컴퓨터는 iMac 또는 Mac Mini 모델이었는데,
+        아래와 같은 이유로 Mac mini를 구매하기로 마음 먹었다.
+      </p>
+      <figure>
+        <img src="./pics/251006_mac_mini_m4.jpg" title="Mac mini M4" alt="Mac mini M4" />
+        <figcaption aria-hidden="true">Mac mini M4의 모습. 정말 작다!</figcaption>
+      </figure>
+      <ul>
+        <li>작고 가벼워서 들고 다니기 편함: 나는 평일에는 집에서 컴퓨터를 자주 사용하지 않기에, 평일에는 회사에서 사용하다가 주말에는 집에서
+          사용할 수 있는 컴퓨터를 원했다. 회사에서 업무용으로 준 맥북이 있지만, M4의 성능을 누리며 근무하고 싶었기에, 회사에서도 사용할 수 있는
+          컴퓨터를 원했다.
+        </li>
+        <li>공간을 거의 차지하지 않음: 내 조그만 방은 이미 전자기기로 포화 상태이기에, 정말 최소한의 공간만을 차지하는 컴퓨터를 원했다.
+        </li>
+        <li>최고의 가성비: 100만원이 안되는 가격으로 애플의 최신 CPU를 사용할 수 있다는 것은 축복이다.</li>
+      </ul>
+      <p>이러한 이유로 최종적으로 mac mini M4를 구매했는데, 정말 대만족하며 사용 중이다. 회사에서도 회의를 갈 때를 제외하면 맥북은 거의 사용하지
+        않는다. M4의 성능이 너무 좋기 때문이다. 특히 내가 놀랐던 점은 가상화 환경(VM) 안에서도 매우 빠릿빠릿하게 작동한다는 점이다.
+      </p>
+      <p>우리 회사에서는 보안 정책으로 인해 컴퓨터 관리 유틸리티를 설치해야 하는데, 내 개인용 PC에 이를 설치하는 것은 부담스러웠기에,
+      <a href="https://mac.getutm.app" target="_blank" rel="noopener">UTM</a>을 통해 가상의 macOS 환경을 구성하여 업무를
+      처리하고 있다. 여기에 Slack, Cursor, LibreOffice, Google Chrome 등 메모리를 많이 먹을만한 앱들을 설치하여 구동하는데,
+      딱 12GB의 RAM만 주었음에도 불구하고 마치 호스트 환경에서 작업하는 것처럼 빠릿빠릿한 사용자 경험을 즐기고 있다. 이것이 바로 M4의 성능인가?
+      </p>
+      <p>집에서 사용할 때 이 컴퓨터에서 느껴지는 가장 큰 장점은 정말 조용하다는 것이다. 팬이 없다는 것이 이렇게 중요하다는 것은 몰랐다.
+        나는 게이밍 컴퓨터를 주로 사용했기에 컴퓨터를 사용할 때마다 들리는 전투기 이륙 소리에 익숙했는데, mac Mini M4에서는 아무런 소리도 들리지
+        않는다. 이것이 집에서 컴퓨터로 업무 볼 때 집중하는데 의외로 큰 도움을 준다. 앞으로 컴퓨터를 살 때에는 팬리스 설계의 제품 위주로 찾아보게
+        될 것 같다.
+      </p>
+      <p>이제 이 컴퓨터로 게임만 돌릴 수 있다면 더 이상 바랄게 없을 것인데, 아쉽게도 이는 조금 오래 걸릴 것 같다. macOS에서 카운터 스트라이크가
+        돌아가는 그 날까지 애플이 게임 지원을 다듬어 주기를 바란다.
+      </p>
+    </div>
+    <br><br>
+    <footer>
+      <script>
+        // If your post lives directly under public/, change path to './footer.html'
+        fetch('../footer.html')
+          .then(response => response.text())
+          .then(data => {
+            document.body.insertAdjacentHTML('beforeend', data);
+          });
+      </script>
+    </footer>
+  </body>
+</html>
+
+
