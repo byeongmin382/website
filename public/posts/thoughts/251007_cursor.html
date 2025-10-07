@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cursor를 사용하여 웹사이트를 새단장하였습니다. 아래는 Cursor가 쓴 변경사항 모음입니다.">
+    <title>병민의 하루: 웹사이트 재단장</title>
+    <link href="../../assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <display_title>
+  <center>
+  웹사이트 재단장
+  </center>
+  </display_title>
+<nav class="main-nav">
+<div class="nav-container">
+  <a href="../../index.html" class="nav-link">Home</a>
+  <a href="../../posts/travel-food/index.html" class="nav-link">여행과 식도락</a>
+  <span class="nav-link disabled">게임</span>
+  <span class="nav-link disabled">기술</span>
+  <a href="../../posts/thoughts/index.html" class="nav-link">생각</a>
+  <a href="../../microblog/microblog.html" class="nav-link">마이크로블로그</a>
+  <a href="https://flickr.com/photos/202913508@N04/" class="nav-link" target="_blank" rel="noopener">사진들</a>
+  <a href="https://www.instagram.com/garfield_kbm/" class="nav-link" target="_blank" rel="noopener">인스타그램</a>
+</div>
+</nav>
+    <div class="container">
+<h1 id="웹사이트-재단장">웹사이트 재단장</h1>
+<p><strong>Date:</strong> 2025-10-07</p>
+<p>Cursor를 사용하여 웹사이트를 새단장하였습니다. 아래는 Cursor가 쓴
+변경사항 모음입니다.</p>
+<h2
+id="website-architecture-revamp---complete-build-system-markdown-support">🚀
+Website Architecture Revamp - Complete Build System &amp; Markdown
+Support</h2>
+<h3 id="summary">📋 Summary</h3>
+<p>This PR introduces a complete architectural overhaul of the personal
+website, transforming it from a manual HTML management system to a
+sophisticated, automated build system with markdown support and
+component-based architecture.</p>
+<h2 id="major-changes">🔄 Major Changes</h2>
+<h3 id="new-build-system-build.sh"><strong>1. New Build System
+(<code>build.sh</code>)</strong></h3>
+<ul>
+<li><strong>1,238 lines</strong> of comprehensive build automation</li>
+<li><strong>One-command workflow</strong>:
+<code>./build.sh build-all</code> handles everything</li>
+<li><strong>Markdown support</strong> with Pandoc integration for
+professional HTML conversion</li>
+<li><strong>Component injection</strong> system for navigation and
+footer</li>
+<li><strong>Index management</strong> with automatic post discovery and
+cleanup</li>
+<li><strong>Validation system</strong> for HTML structure and links</li>
+</ul>
+<h3 id="asset-reorganization"><strong>2. Asset
+Reorganization</strong></h3>
+<ul>
+<li><strong>Moved all assets</strong> to organized
+<code>public/assets/</code> structure:
+<ul>
+<li><code>fonts/</code> → <code>assets/fonts/</code> (Neo둥근모 font
+files)</li>
+<li><code>badges/</code> → <code>assets/images/</code> (all badge
+images)</li>
+<li><code>style.css</code> → <code>assets/css/style.css</code></li>
+</ul></li>
+<li><strong>Improved path management</strong> for better deployment
+compatibility</li>
+</ul>
+<h3 id="component-based-architecture"><strong>3. Component-Based
+Architecture</strong></h3>
+<ul>
+<li><strong>New navigation system</strong> with multiple levels:
+<ul>
+<li><code>nav-root.html</code> - Root level pages</li>
+<li><code>nav-level1.html</code> - Microblog pages<br />
+</li>
+<li><code>nav-level2.html</code> - Post pages</li>
+</ul></li>
+<li><strong>Centralized footer</strong> component with automatic path
+adjustment</li>
+<li><strong>Template system</strong> for consistent post creation</li>
+</ul>
+<h3 id="content-structure-overhaul"><strong>4. Content Structure
+Overhaul</strong></h3>
+<ul>
+<li><strong>Organized post categories</strong>:
+<ul>
+<li><code>posts/thoughts/</code> - Personal thoughts and
+experiences</li>
+<li><code>posts/travel-food/</code> - Travel and food content</li>
+</ul></li>
+<li><strong>Markdown support</strong> with dedicated
+<code>markdown/</code> directories</li>
+<li><strong>New microblog system</strong> with markdown-based
+entries</li>
+<li><strong>Index pages</strong> for each category with automatic post
+discovery</li>
+</ul>
+<h3 id="new-content-features"><strong>5. New Content &amp;
+Features</strong></h3>
+<ul>
+<li><strong>New blog post</strong>: “Cursor” (251007_cursor.html)</li>
+<li><strong>New microblog entry</strong>: “Daily Thoughts”
+(2025-10-07)</li>
+<li><strong>Markdown templates</strong> for both blog posts and
+microblog</li>
+<li><strong>Deployment checklist</strong> for Neocities deployment</li>
+<li><strong>Git ignore rules</strong> for macOS development</li>
+</ul>
+<h2 id="file-changes-summary">📁 File Changes Summary</h2>
+<table>
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 21%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>Change Type</th>
+<th>Count</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Added</strong></td>
+<td>15 files</td>
+<td>New build system, components, templates, content</td>
+</tr>
+<tr>
+<td><strong>Modified</strong></td>
+<td>4 files</td>
+<td>Updated README, index, microblog, not_found pages</td>
+</tr>
+<tr>
+<td><strong>Moved</strong></td>
+<td>12 files</td>
+<td>Asset reorganization and content restructuring</td>
+</tr>
+<tr>
+<td><strong>Deleted</strong></td>
+<td>5 files</td>
+<td>Removed old structure and unused files</td>
+</tr>
+</tbody>
+</table>
+<h2 id="new-build-commands">🛠️ New Build Commands</h2>
+<pre class="bash"><code># Content creation
+./build.sh new-post [category] [filename]           # Create HTML blog post
+./build.sh new-post-md [category] [filename]       # Create markdown blog post  
+./build.sh new-microblog [filename]                # Create microblog entry
+
+# Content processing
+./build.sh build-microblog                         # Convert microblog markdown
+./build.sh build-posts                             # Convert blog post markdown
+./build.sh rebuild-indexes                         # Rebuild all indexes
+
+# One-command workflow
+./build.sh build-all                               # Complete build process
+
+# Maintenance
+./build.sh inject-nav                              # Update navigation
+./build.sh inject-footer                           # Update footer
+./build.sh validate                                # Validate HTML
+./build.sh deploy                                  # Prepare for deployment</code></pre>
+<h2 id="key-benefits">🎯 Key Benefits</h2>
+<ol type="1">
+<li><strong>🚀 Automation</strong>: Single command handles entire build
+process</li>
+<li><strong>📝 Markdown Support</strong>: Write in markdown, get
+professional HTML</li>
+<li><strong>🧩 Component System</strong>: Reusable navigation and footer
+components</li>
+<li><strong>📁 Better Organization</strong>: Logical asset and content
+structure</li>
+<li><strong>🔧 Developer Experience</strong>: Comprehensive tooling and
+validation</li>
+<li><strong>📱 Deployment Ready</strong>: Optimized for Neocities static
+hosting</li>
+</ol>
+<h2 id="impact">📊 Impact</h2>
+<ul>
+<li><strong>+2,690 lines added</strong> (primarily build system and
+documentation)</li>
+<li><strong>-476 lines removed</strong> (old manual structure)</li>
+<li><strong>48 files changed</strong> (complete architectural
+overhaul)</li>
+<li><strong>Zero breaking changes</strong> to existing content</li>
+<li><strong>Enhanced maintainability</strong> with automated
+workflows</li>
+</ul>
+<h2 id="testing">🧪 Testing</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Build system
+validation</label></li>
+<li><label><input type="checkbox" checked="" />HTML structure
+validation<br />
+</label></li>
+<li><label><input type="checkbox" checked="" />Navigation component
+injection</label></li>
+<li><label><input type="checkbox" checked="" />Markdown conversion with
+Pandoc</label></li>
+<li><label><input type="checkbox" checked="" />Asset path
+verification</label></li>
+<li><label><input type="checkbox" checked="" />Deployment checklist
+creation</label></li>
+</ul>
+<h2 id="documentation">📚 Documentation</h2>
+<ul>
+<li><strong>Comprehensive README</strong> with usage examples and
+troubleshooting</li>
+<li><strong>Deployment checklist</strong> for Neocities deployment</li>
+<li><strong>Template documentation</strong> for content creation</li>
+<li><strong>Build script help</strong> with
+<code>./build.sh help</code></li>
+</ul>
+<p><strong>This PR transforms the website from a manual HTML management
+system into a modern, automated, markdown-enabled static site generator
+while maintaining full backward compatibility with existing
+content.</strong></p>
+    </div>
+    <br><br>
+    <footer>
+    이 페이지는 데스크탑 환경에서 원활하게 표시됩니다.<br><br>
+    <center>
+    <a href="http://www.dnsever.com" target="dnsever"><img src="http://banner.dnsever.com/dnsever-banner_88x31.gif" border="0" alt="DNS server, DNS service"></a>
+    <img src="http://www.kobm.x../../assets/images/ns-best.gif" border="0" alt="Best viewed with Netscape Badge">
+    <a href="https://store.steampowered.com" target="steam"><img src="../../assets/images/steam.gif" border="0" alt="Play with Steam"></a>
+    <img src="http://www.kobm.x../../assets/images/notepad.gif" border="0" alt="Made from Notepad">
+    <a href="https://web.archive.org/web/20070130012840/http://netculture.or.kr/" target="따뜻밴드"><img src="../../assets/images/banner_spring.gif" border="0" alt="따뜻밴드"></a>
+    <a href="https://kldp.org/" target="KLDP"><img src="../../assets/images/kldp.png" border="0" alt="KLDP"></a>
+    <a href="https://rp5.ru/12514/en"><img border=0 width=88 height=31 src="https://rp5.ru/informer/88x31x2.php?f=2&id=12514&lang=en&um=00000"></a>
+    </center>
+    <left>
+    <p>병민의 하루(2024.12.23. ~ 오늘) | Powered by <a href='https://en.wikipedia.org/wiki/Supply_and_demand'>Supply and Demand™</a></p>
+    <p> Copyright © 2025, KO BYEONGMIN
+    <p>Headings and Footer Font: <a href="https://neodgm.dalgona.dev/">Neo둥근모</a></p>
+    </left>
+</footer>
+  </body>
+</html>
