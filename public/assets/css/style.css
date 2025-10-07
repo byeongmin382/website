@@ -27,7 +27,7 @@ h1, h2 {
     font-family: "neodgm", sans-serif;
     margin: 1em 0; /* Consistent vertical spacing */
     padding: 0.2em; /* Adds a bit of inner spacing */
-    text-align: center;
+    text-align: left;
 }
 
 p {
