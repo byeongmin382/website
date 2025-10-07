@@ -11,7 +11,7 @@ A personal blog website built with vanilla HTML, CSS, and JavaScript, designed f
 ./build.sh build-all
 ```
 
-This single command handles everything: converts markdown, rebuilds indexes, and updates navigation/footer.
+This single command handles everything: cleans files, converts markdown, rebuilds indexes, and updates navigation/footer.
 
 ## 📁 Project Structure
 
@@ -53,7 +53,7 @@ website/
 | `./build.sh build-microblog` | Convert markdown to HTML using Pandoc |
 | `./build.sh build-posts` | Convert markdown blog posts to HTML |
 | `./build.sh rebuild-indexes` | Rebuild all index files from existing posts |
-| `./build.sh build-all` | **One-click build: convert markdown, rebuild indexes, inject nav/footer** |
+| `./build.sh build-all` | **One-click build: clean files, convert markdown, rebuild indexes, inject nav/footer** |
 | `./build.sh inject-nav` | Update navigation on all pages |
 | `./build.sh inject-footer` | Update footer on all pages |
 | `./build.sh validate` | Validate HTML structure |
@@ -147,7 +147,7 @@ The `build.sh` script provides several commands to help manage the website:
 # Rebuild all index files (removes deleted posts from indexes)
 ./build.sh rebuild-indexes
 
-# One-click build: convert markdown, rebuild indexes, inject nav/footer
+# One-click build: clean files, convert markdown, rebuild indexes, inject nav/footer
 ./build.sh build-all
 ```
 
@@ -174,10 +174,11 @@ Automatically rebuilds all index files by scanning existing HTML posts. This is 
 **The ultimate convenience command!** This single command handles everything you need after adding or editing posts:
 
 **What it does automatically:**
-- ✅ **Step 1**: Converts microblog markdown to HTML using Pandoc
-- ✅ **Step 2**: Converts blog posts markdown to HTML using Pandoc  
-- ✅ **Step 3**: Rebuilds all index files (removes deleted, adds new posts)
-- ✅ **Step 4**: Updates navigation and footer on all pages
+- ✅ **Step 1**: Cleans up temporary files (.DS_Store, backup files, etc.)
+- ✅ **Step 2**: Converts microblog markdown to HTML using Pandoc
+- ✅ **Step 3**: Converts blog posts markdown to HTML using Pandoc  
+- ✅ **Step 4**: Rebuilds all index files (removes deleted, adds new posts)
+- ✅ **Step 5**: Updates navigation and footer on all pages
 
 **Perfect for:**
 - 🚀 **After adding new posts** - Everything gets updated automatically

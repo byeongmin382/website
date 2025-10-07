@@ -667,26 +667,31 @@ EOF
 # Function to perform complete build workflow
 build_all() {
     print_status "🚀 Starting one-click build process..."
-    print_status "This will convert markdown, rebuild indexes, and update navigation/footer"
+    print_status "This will clean files, convert markdown, rebuild indexes, and update navigation/footer"
     echo ""
     
-    # Step 1: Convert markdown microblog
-    print_status "Step 1/4: Converting microblog markdown to HTML..."
+    # Step 1: Clean up temporary files
+    print_status "Step 1/5: Cleaning up temporary files..."
+    clean_files
+    echo ""
+    
+    # Step 2: Convert markdown microblog
+    print_status "Step 2/5: Converting microblog markdown to HTML..."
     build_microblog
     echo ""
     
-    # Step 2: Convert markdown blog posts
-    print_status "Step 2/4: Converting blog posts markdown to HTML..."
+    # Step 3: Convert markdown blog posts
+    print_status "Step 3/5: Converting blog posts markdown to HTML..."
     build_posts
     echo ""
     
-    # Step 3: Rebuild all indexes
-    print_status "Step 3/4: Rebuilding all index files..."
+    # Step 4: Rebuild all indexes
+    print_status "Step 4/5: Rebuilding all index files..."
     rebuild_indexes
     echo ""
     
-    # Step 4: Inject navigation and footer
-    print_status "Step 4/4: Updating navigation and footer on all pages..."
+    # Step 5: Inject navigation and footer
+    print_status "Step 5/5: Updating navigation and footer on all pages..."
     inject_navigation
     inject_footer
     echo ""
