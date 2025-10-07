@@ -568,63 +568,15 @@ EOF
         print_success "Updated travel-food index"
     fi
     
-    # Rebuild main index
+    # Update main index posts list only (preserve custom content)
     local main_index="public/index.html"
-    print_status "Rebuilding main index..."
+    print_status "Updating main index posts list (preserving custom content)..."
     
     # Create temporary file
     local temp_file=$(mktemp)
     
-    # Start with the HTML header
-    cat > "$temp_file" << 'EOF'
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="피자를 사랑하는 상상가의 일기장입니다. 일상, 기술, 비디오게임에 관한 블로그." />
-    <title>병민의 하루</title>
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-  </head>
-  <body>
-    <display_title>
-      <br/>
-      <center>
-        &#128221; 병민의 하루
-      </center>
-    </display_title>
-<nav class="main-nav">
-<div class="nav-container">
-  <a href="index.html" class="nav-link">Home</a>
-  <a href="posts/travel-food/index.html" class="nav-link">여행과 식도락</a>
-  <span class="nav-link disabled">게임</span>
-  <span class="nav-link disabled">기술</span>
-  <a href="posts/thoughts/index.html" class="nav-link">생각</a>
-  <a href="microblog/microblog.html" class="nav-link">마이크로블로그</a>
-  <a href="https://flickr.com/photos/202913508@N04/" class="nav-link" target="_blank" rel="noopener">사진들</a>
-  <a href="https://www.instagram.com/garfield_kbm/" class="nav-link" target="_blank" rel="noopener">인스타그램</a>
-</div>
-</nav>
-    <div class="container">
-    <h1>안녕하세요!&#128075;</h1>
-    <center>
-    <p>같이 피자 한 판 어때요? &#129392;</p>
-    </center>
-    <h2>자기소개 &#128483;</h2>
-    <p>피자, 비디오 게임, 그리고 기술을 좋아하는 풀스택 상상가 &#127829; &#127918; &#128187; &#127939;</p>
-    <ul>
-    <li>이름: 고병민 (KO BYEONGMIN)
-    <ul>
-      <li>Family name: KO</li>
-      <li>Given/Preferred name: BYEONGMIN</li>
-    </ul></li><br/>
-    <li>이메일: <a href="mailto:ko@kobm.xyz">ko@kobm.xyz</a></li>
-    </ul>
-    <h2>최근 발행된 글 &#128221;</h2>
-      <ul>
-EOF
-    
-    # Find all HTML files in posts directories and sort by modification time (newest first)
+    # Generate the new posts list
+    local posts_list=""
     find public/posts -name "*.html" -not -name "index.html" -exec ls -t {} + | head -10 | while read -r html_file; do
         local basename=$(basename "$html_file" .html)
         local relative_path=$(echo "$html_file" | sed 's|public/||')
@@ -647,34 +599,63 @@ EOF
                 date="($year-$month-$day)"
             fi
             
-            echo "        <li><a href=$relative_path>$title $date</a></li>" >> "$temp_file"
+            echo "        <li><a href=$relative_path>$title $date</a></li>"
         fi
-    done
+    done > "$temp_file"
     
-    # Add footer placeholder
-    cat >> "$temp_file" << 'EOF'
-      </ul>
-    <p>그리고 제 <a href=https://kobm.xyz/microblog/microblog>마이크로블로그</a>에도 짧은 글을 자주 적습니다.</p>
-    <h2>공사 중! &#128679;</h2>
-    <center>
-    <img src=assets/images/construction.gif alt="언제나 공사중"><br/>
-    <img src=https://media.tenor.com/42bcTn0iuVgAAAAi/under-construction-pikachu.gif alt="페이지 공사중">
-    <p>페이지가 아직 공사 중입니다! 페이지에 게시될 많은 콘텐츠를 기대해주세요...</p>
-    </center>
-      <h3>To-Do List</h3>
-      <ul><li>모바일 친화적 Footer</li></ul>
-    </div>
-    <br/><br/>
-    <footer>
-    <!-- Footer will be injected by build script -->
-    </footer>
-  </body>
-</html>
-EOF
+    # Update the main index file by replacing only the posts list section
+    awk -v posts_file="$temp_file" '
+    BEGIN { 
+        in_posts_list = 0
+        posts_replaced = 0
+        # Read the new posts list
+        while ((getline line < posts_file) > 0) {
+            posts_content = posts_content line "\n"
+        }
+        close(posts_file)
+    }
+    
+    # Detect start of posts list
+    /<h2>최근 발행된 글/ {
+        print $0
+        getline
+        if ($0 ~ /<ul>/) {
+            print $0
+            printf "%s", posts_content
+            getline
+            # Skip existing list items until we find the closing </ul>
+            while ($0 !~ /<\/ul>/) {
+                getline
+            }
+            print "      </ul>"
+            posts_replaced = 1
+        } else {
+            print "      <ul>"
+            printf "%s", posts_content
+            print "      </ul>"
+            posts_replaced = 1
+        }
+        next
+    }
+    
+    # Skip content while inside the posts list (until </ul>)
+    in_posts_list && /<\/ul>/ {
+        in_posts_list = 0
+        next
+    }
+    
+    # Track if we are inside the posts list
+    /<ul>/ && /최근 발행된 글/ { in_posts_list = 1 }
+    in_posts_list { next }
+    
+    # Print all other lines
+    { print }
+    ' "$main_index" > "${temp_file}.new"
     
     # Replace the original file
-    mv "$temp_file" "$main_index"
-    print_success "Updated main index"
+    mv "${temp_file}.new" "$main_index"
+    rm -f "$temp_file"
+    print_success "Updated main index posts list (preserved custom content)"
     
     print_success "All index files rebuilt successfully!"
     print_status "Run './build.sh inject-nav' and './build.sh inject-footer' to update navigation and footer"
@@ -999,8 +980,13 @@ inject_navigation() {
         fi
     done
     
-    # Find all HTML files (excluding components and templates)
-    find public/ -name "*.html" -not -path "*/components/*" -not -path "*/templates/*" | while read -r html_file; do
+    # Find all HTML files (excluding components, templates, and not_found.html by basename)
+    find public/ -name "*.html" -not -path "*/components/*" -not -path "*/templates/*" -not -name "not_found.html" | while read -r html_file; do
+        # Explicitly skip not_found.html (match by basename to be robust)
+        if [ "$(basename "$html_file")" = "not_found.html" ]; then
+            print_status "Skipping footer injection for: $html_file"
+            continue
+        fi
         local file_dir=$(dirname "$html_file")
         local nav_component=""
         local relative_path=""
@@ -1088,8 +1074,8 @@ inject_footer() {
         exit 1
     fi
     
-    # Find all HTML files (excluding components and templates)
-    find public/ -name "*.html" -not -path "*/components/*" -not -path "*/templates/*" | while read -r html_file; do
+    # Find all HTML files (excluding components, templates, and not_found.html by name)
+    find public/ -name "*.html" -not -path "*/components/*" -not -path "*/templates/*" -not -name "not_found.html" | while read -r html_file; do
         local file_dir=$(dirname "$html_file")
         local relative_path=""
         
