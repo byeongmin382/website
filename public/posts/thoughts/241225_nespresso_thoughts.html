@@ -8,22 +8,25 @@
     <!-- The style.css file allows you to change the look of your web pages.
          If you include the next line in all your web pages, they will all share the same look.
          This makes it easier to make new pages for your site. -->
-    <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../../assets/css/style.css" rel="stylesheet" type="text/css" media="all">
   </head>
   <display_title>
   <center>
   네스프레소에 대한 단상 &#9749;
   </center>
   </display_title>
-    <nav>
-  <script>
-        fetch('../nav.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.body.insertAdjacentHTML('afterbegin', data);
-                });
-        </script>
-  </nav>
+<nav class="main-nav">
+<div class="nav-container">
+  <a href="../../index.html" class="nav-link">Home</a>
+  <a href="../../posts/travel-food/index.html" class="nav-link">여행과 식도락</a>
+  <span class="nav-link disabled">게임</span>
+  <span class="nav-link disabled">기술</span>
+  <a href="../../posts/thoughts/index.html" class="nav-link">생각</a>
+  <a href="../../microblog/microblog.html" class="nav-link">마이크로블로그</a>
+  <a href="https://flickr.com/photos/202913508@N04/" class="nav-link" target="_blank" rel="noopener">사진들</a>
+  <a href="https://www.instagram.com/garfield_kbm/" class="nav-link" target="_blank" rel="noopener">인스타그램</a>
+</div>
+</nav>
   <div class="container">
 <body> <!-- 본문 시작!!!! -->
 <p><strong>네</strong>스프레소만 있으면<br> <strong>스</strong>타벅스 갈 필요 없이<br> <strong>프</strong>렌치프레스도 필요 없이<br> <strong>레</strong>쓰비보다 간편하게<br> <strong>소</strong>파에서 커피를 마실 수 있다</p>
@@ -41,12 +44,20 @@
   </div>
     <br><br>
     <footer>
-        <script>
-            fetch('../footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.body.insertAdjacentHTML('beforeend', data);
-                });
-        </script>
-    </footer>
+    이 페이지는 데스크탑 환경에서 원활하게 표시됩니다.<br><br>
+    <center>
+    <a href="http://www.dnsever.com" target="dnsever"><img src="http://banner.dnsever.com/dnsever-banner_88x31.gif" border="0" alt="DNS server, DNS service"></a>
+    <img src="http://www.kobm.x../../assets/images/ns-best.gif" border="0" alt="Best viewed with Netscape Badge">
+    <a href="https://store.steampowered.com" target="steam"><img src="../../assets/images/steam.gif" border="0" alt="Play with Steam"></a>
+    <img src="http://www.kobm.x../../assets/images/notepad.gif" border="0" alt="Made from Notepad">
+    <a href="https://web.archive.org/web/20070130012840/http://netculture.or.kr/" target="따뜻밴드"><img src="../../assets/images/banner_spring.gif" border="0" alt="따뜻밴드"></a>
+    <a href="https://kldp.org/" target="KLDP"><img src="../../assets/images/kldp.png" border="0" alt="KLDP"></a>
+    <a href="https://rp5.ru/12514/en"><img border=0 width=88 height=31 src="https://rp5.ru/informer/88x31x2.php?f=2&id=12514&lang=en&um=00000"></a>
+    </center>
+    <left>
+    <p>병민의 하루(2024.12.23. ~ 오늘) | Powered by <a href='https://en.wikipedia.org/wiki/Supply_and_demand'>Supply and Demand™</a></p>
+    <p> Copyright © 2025, KO BYEONGMIN
+    <p>Headings and Footer Font: <a href="https://neodgm.dalgona.dev/">Neo둥근모</a></p>
+    </left>
+</footer>
 </html>
