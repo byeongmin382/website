@@ -194,6 +194,22 @@ Automatically rebuilds all index files by scanning existing HTML posts. This is 
 # Your website is now fully updated and ready!
 ```
 
+```mermaid
+flowchart TD
+    A(["Start"]) --> B{"Arg == &quot;build-all&quot;?"};
+    B -->|No| H1["Show help text"];
+    H1 --> Z(["End"]);
+    B -->|Yes| C["Print &quot;Starting one-click build...&quot;"];
+    C --> D["Step 1: clean_files<br/>• Remove .DS_Store<br/>• Remove *.bak and *~ under public/"];
+    D --> E["Step 2: build_microblog<br/>• Read public/markdown/microblog/*.md<br/>• Sort newest→oldest<br/>• Group by year/month<br/>• Render entries into public/microblog/microblog.html"];
+    E --> F["Step 3: build_posts<br/>• For categories: thoughts, travel-food<br/>• Read public/markdown/posts/&lt;cat&gt;/*.md<br/>• Extract title &amp; description<br/>• Emit HTML to public/posts/&lt;cat&gt;/&lt;post&gt;.html"];
+    F --> G["Step 4: rebuild_indexes<br/>• Rebuild public/posts/thoughts/index.html<br/>• Rebuild public/posts/travel-food/index.html<br/>• Rebuild main public/index.html &#40;recent links, etc.&#41;"];
+    G --> I["Step 5: inject_navigation<br/>• Pick nav-root / nav-level1 / nav-level2 by path depth<br/>• Inject into &lt;nav&gt; of every HTML under public/"];
+    I --> J["Inject_footer<br/>• Inject footer component<br/>• Fix relative asset paths by depth"];
+    J --> K["Print success + tip to run &quot;./build.sh deploy&quot;"];
+    K --> Z;
+```
+
 #### Inject Navigation into All Pages
 ```bash
 ./build.sh inject-nav
