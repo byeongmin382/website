@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="작년부터 [https://www.kobm.xyz](https://www.kobm.xyz)에 내 홈페이지를 운영했지만 관리가 매우 어려웠다.">
+    <title>병민의 하루: AI와 함께하는 홈페이지 업그레이드</title>
+    <link href="../../assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+  <display_title>
+  <center>
+  AI와 함께하는 홈페이지 업그레이드
+  </center>
+  </display_title>
+<nav class="main-nav">
+<div class="nav-container">
+  <a href="../../index.html" class="nav-link">Home</a>
+  <a href="../../posts/travel-food/index.html" class="nav-link">여행과 식도락</a>
+  <span class="nav-link disabled">게임</span>
+  <span class="nav-link disabled">기술</span>
+  <a href="../../posts/thoughts/index.html" class="nav-link">생각</a>
+  <a href="../../microblog/microblog.html" class="nav-link">마이크로블로그</a>
+  <a href="https://flickr.com/photos/202913508@N04/" class="nav-link" target="_blank" rel="noopener">사진들</a>
+  <a href="https://www.instagram.com/garfield_kbm/" class="nav-link" target="_blank" rel="noopener">인스타그램</a>
+</div>
+</nav>
+    <div class="container">
+<h1 id="ai와-함께하는-홈페이지-업그레이드">AI와 함께하는 홈페이지
+업그레이드</h1>
+<p><strong>Date:</strong> 2025-10-07</p>
+<p>작년부터 <a href="https://www.kobm.xyz">https://www.kobm.xyz</a>에 내
+홈페이지를 운영했지만 관리가 매우 어려웠다. 선택했던 플랫폼인
+Neocities가 Jekyll이나 Ghost 등 CMS를 별도로 지원하지 않았기에 그때 그
+시절 사이트처럼 순수 HTML와 CSS로 홈페이지를 작성해야 했기 때문이다.
+거기에 드림위버 등 별도의 도구를 사용하지 않고 순수 텍스트 에디터만으로
+작업하였기 때문에 내 웹사이트는 탄생하는 당일부터 기술적 부채가 되어
+버렸다.</p>
+<p>새 글을 작성하는 것도 너무 귀찮은 일이었다. 일단 HTML 파일을
+열어야했고, 본문을 작성한뒤 문단마다 <code>&lt;p&gt;</code> 태그를
+나눠줘야 했으며, 불렛 포인트 목록이라도 만들려고 하면
+<code>&lt;ul&gt;</code>과 <code>&lt;li&gt;</code> 태그를 일일이 적어
+줘야했다. 그렇게 글을 작성한 뒤 글 목록인 index.html에 제목과 링크를
+수동으로 추가해줘야 했다. 자연스럽게 글을 쓰는 수고보다 마크업 언어
+관리에 시간을 더 사용하게 됐고, 이는 기껏 만들었던 홈페이지에 지난 1년간
+총 4개의 글만 작성하는 결과로 이어졌다.</p>
+<p>더 두고 볼 수 없어서 이번 추석 연휴 때 본격적인 업그레이드를
+단행했다. 작년과 다른 점이 있다면 이번에는 AI의 도움을 적극 받았다는
+점이다. 한 달에 $20씩이나 가져가는 Cursor를 활용하기 위해 우선 아래의
+작업을 진행했다.</p>
+<ul>
+<li>홈페이지와 GitHub 연동: <code>deploy-to-neocities</code>라는 Github
+action을 활용했다. <a
+href="https://deploy-to-neocities.neocities.org">[LINK]</a>
+<ul>
+<li>이것이 있으면 <a href="https://github.com/byeongmin382/website">내
+홈페이지 repository</a>의 main 브랜치에 푸쉬가 있을 때마다 Neocities에서
+자동으로 내용을 반영한다.</li>
+</ul></li>
+<li>Cursor를 사용해 내 repository를 복제했다.
+<ul>
+<li>이 작업을 통해 Cursor에게 내 웹사이트의 구조를 보여줄 수 있다.</li>
+</ul></li>
+</ul>
+<p>그리고 컨텐츠가 발행되는 방법을 Cursor를 사용해 완전히 바꿔버렸다.
+내가 직접 코드를 짰다면 이번 추석 연휴 내에 못 끝냈을 수도 있겠지만,
+인공지능의 도움을 통해 몇 시간만에 잘 작동하는 결과물을 만들 수
+있었다.</p>
+<figure>
+<img src="./pics/251006_github_pr.png" alt="Cursor의 도움으로 완성한 CMS의 PR" style="max-width:100%; height:auto;">
+<figcaption>
+Cursor의 도움으로 완성한 CMS의 PR
+</figcaption>
+</figure>
+<p>아래와 같은 CMS를 구축했다.</p>
+<ol type="1">
+<li>새 컨텐츠를 만들고 싶으면,
+<code>./build.sh new-post-md [category] [filename]</code>을
+실행한다.</li>
+<li>생성된 Markdown 파일을 수정한다.</li>
+<li><code>./build.sh build-all</code> 명령어를 실행한다.</li>
+<li>내 repository를 main 브랜치로 merge 한다.</li>
+</ol>
+<p>이러면 자동으로 아래와 같은 작업이 수행된다.</p>
+<ol type="1">
+<li><code>pandoc</code>을 활용해 자동으로 내 Markdown 파일이 홈페이지를
+위한 HTML 파일로 변환된다. 제목과 같은 변수는 자동으로 적힌다.</li>
+<li>새 글이 내 홈페이지의 level 1 및 level 2 인덱스에 자동으로 적힌다.
+즉, 목록에 내 글이 자동으로 업데이트 된다.</li>
+<li>만약 (전 사이트 공통으로 적용되는) header와 footer가 업데이트 되었을
+경우, 이 또한 모든 콘텐츠에 자동으로 업데이트 된다.</li>
+</ol>
+<p>이제 홈페이지 업데이트를 빠르고 쉽게 할 수 있다. 네이버 블로그와
+비교해도 작성 속도에 큰 차이는 없을 듯 하다. 앞으로 더 자주
+업데이트해야지.</p>
+    </div>
+    <br><br>
+    <footer>
+    이 페이지는 데스크탑 환경에서 원활하게 표시됩니다.<br><br>
+    <center>
+    <a href="http://www.dnsever.com" target="dnsever"><img src="http://banner.dnsever.com/dnsever-banner_88x31.gif" border="0" alt="DNS server, DNS service"></a>
+    <img src="../../assets/images/ns-best.gif" border="0" alt="Best viewed with Netscape Badge">
+    <a href="https://store.steampowered.com" target="steam"><img src="../../assets/images/steam.gif" border="0" alt="Play with Steam"></a>
+    <img src="../../assets/images/notepad.gif" border="0" alt="Made from Notepad">
+    <a href="https://web.archive.org/web/20070130012840/http://netculture.or.kr/" target="따뜻밴드"><img src="../../assets/images/banner_spring.gif" border="0" alt="따뜻밴드"></a>
+    <a href="https://kldp.org/" target="KLDP"><img src="../../assets/images/kldp.png" border="0" alt="KLDP"></a>
+    <a href="https://rp5.ru/12514/en"><img border=0 width=88 height=31 src="https://rp5.ru/informer/88x31x2.php?f=2&id=12514&lang=en&um=00000"></a>
+    </center>
+    <left>
+    <p>병민의 하루(2024.12.23. ~ 오늘) | Powered by <a href='https://en.wikipedia.org/wiki/Supply_and_demand'>Supply and Demand™</a></p>
+    <p> Copyright © 2025, KO BYEONGMIN
+    <p>Headings and Footer Font: <a href="https://neodgm.dalgona.dev/">Neo둥근모</a></p>
+    </left>
+</footer>
+  </body>
+</html>

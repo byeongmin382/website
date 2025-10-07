@@ -12,7 +12,7 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.2;
+    line-height: 1;
 }
 
 .container {
@@ -33,6 +33,7 @@ h1, h2 {
 p {
     margin: 0.3em 0; /* Reduced vertical spacing */
     padding: 0.1em; /* Reduced inner spacing */
+    line-height: 1.4; /* Increased line spacing for paragraphs only */
 }
 
 /* Microblog specific styles */
