@@ -222,12 +222,28 @@ EOF
     # Find all markdown files and sort by date (newest first)
     find "$markdown_dir" -name "*.md" -not -name "template.md" | sort -r | while read -r markdown_file; do
         local basename=$(basename "$markdown_file" .md)
-        local date=$(echo "$basename" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' || echo "")
+        local date=""
+        local year=""
+        local month=""
+        local day=""
         
+        # Try YYYY-MM-DD format first
+        date=$(echo "$basename" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' || echo "")
         if [ -n "$date" ]; then
-            local year=$(echo "$date" | cut -d'-' -f1)
-            local month=$(echo "$date" | cut -d'-' -f2)
-            local day=$(echo "$date" | cut -d'-' -f3)
+            year=$(echo "$date" | cut -d'-' -f1)
+            month=$(echo "$date" | cut -d'-' -f2)
+            day=$(echo "$date" | cut -d'-' -f3)
+        else
+            # Try YYMMDD format (6 digits)
+            local yymmdd=$(echo "$basename" | grep -o '^[0-9]\{6\}' || echo "")
+            if [ -n "$yymmdd" ]; then
+                year="20$(echo "$yymmdd" | cut -c1-2)"
+                month=$(echo "$yymmdd" | cut -c3-4)
+                day=$(echo "$yymmdd" | cut -c5-6)
+            fi
+        fi
+        
+        if [ -n "$year" ] && [ -n "$month" ] && [ -n "$day" ]; then
             
             # Add year header if changed
             if [ "$year" != "$current_year" ]; then
