@@ -296,7 +296,7 @@ build_posts() {
     fi
     
     # Process each category
-    for category in thoughts travel-food; do
+    for category in thoughts travel-food tech; do
         local category_markdown_dir="$markdown_dir/$category"
         local category_posts_dir="$posts_dir/$category"
         
@@ -568,6 +568,97 @@ EOF
         print_success "Updated travel-food index"
     fi
     
+    # Rebuild tech index
+    local tech_dir="public/posts/tech"
+    local tech_index="$tech_dir/index.html"
+    
+    if [ -d "$tech_dir" ]; then
+        print_status "Rebuilding tech index..."
+        
+        # Create temporary file
+        local temp_file=$(mktemp)
+        
+        # Start with the HTML header
+        cat > "$temp_file" << 'EOF'
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="기술과 개발에 대한 글들입니다." />
+    <title>병민의 하루: 기술</title>
+    <link href="../../assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+    <display_title>
+      <br>
+      <center>
+        &#128187; 기술
+      </center>
+    </display_title>
+<nav class="main-nav">
+<div class="nav-container">
+  <a href="../../index.html" class="nav-link">Home</a>
+  <a href="../../posts/travel-food/index.html" class="nav-link">여행과 식도락</a>
+  <span class="nav-link disabled">게임</span>
+  <a href="../../posts/tech/index.html" class="nav-link">기술</a>
+  <a href="../../posts/thoughts/index.html" class="nav-link">생각</a>
+  <a href="../../microblog/microblog.html" class="nav-link">마이크로블로그</a>
+  <a href="https://flickr.com/photos/202913508@N04/" class="nav-link" target="_blank" rel="noopener">사진들</a>
+  <a href="https://www.instagram.com/garfield_kbm/" class="nav-link" target="_blank" rel="noopener">인스타그램</a>
+</div>
+</nav>
+    <div class="container">
+      <h1>기술과 개발</h1>
+      <p>프로그래밍, 개발 도구, 기술 트렌드에 대한 이야기를 기록합니다.</p>
+      
+      <h2>최근 글</h2>
+      <ul>
+EOF
+        
+        # Find all HTML files in tech directory (excluding index.html)
+        find "$tech_dir" -name "*.html" -not -name "index.html" | sort -r | while read -r html_file; do
+            local basename=$(basename "$html_file" .html)
+            local title=""
+            
+            # Extract title from HTML file
+            if [ -f "$html_file" ]; then
+                title=$(grep -o '<title>병민의 하루: [^<]*</title>' "$html_file" | sed 's/<title>병민의 하루: //' | sed 's/<\/title>//')
+                if [ -z "$title" ]; then
+                    # Fallback to filename if title not found
+                    title=$(echo "$basename" | sed 's/_/ /g' | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')
+                fi
+                
+                # Extract date from filename if it follows the pattern YYYYMMDD
+                local date=""
+                if echo "$basename" | grep -q '^[0-9]\{8\}'; then
+                    local year=$(echo "$basename" | cut -c1-4)
+                    local month=$(echo "$basename" | cut -c5-6)
+                    local day=$(echo "$basename" | cut -c7-8)
+                    date="($year-$month-$day)"
+                fi
+                
+                echo "        <li><a href=\"$basename.html\">$title $date</a></li>" >> "$temp_file"
+            fi
+        done
+        
+        # Add footer placeholder
+        cat >> "$temp_file" << 'EOF'
+      </ul>
+    </div>
+    <br><br>
+    <footer>
+    <!-- Footer will be injected by build script -->
+    </footer>
+  </body>
+</html>
+EOF
+        
+        # Replace the original file
+        mv "$temp_file" "$tech_index"
+        print_success "Updated tech index"
+    fi
+    
     # Update main index posts list only (preserve custom content)
     local main_index="public/index.html"
     print_status "Updating main index posts list (preserving custom content)..."
@@ -705,13 +796,13 @@ create_new_markdown_post() {
     
     if [ -z "$category" ] || [ -z "$filename" ]; then
         print_error "Usage: ./build.sh new-post-md [category] [filename]"
-        print_error "Categories: thoughts, travel-food"
+        print_error "Categories: thoughts, travel-food, tech"
         exit 1
     fi
     
     # Validate category
-    if [ "$category" != "thoughts" ] && [ "$category" != "travel-food" ]; then
-        print_error "Invalid category. Use: thoughts, travel-food"
+    if [ "$category" != "thoughts" ] && [ "$category" != "travel-food" ] && [ "$category" != "tech" ]; then
+        print_error "Invalid category. Use: thoughts, travel-food, tech"
         exit 1
     fi
     
@@ -759,13 +850,13 @@ create_new_post() {
     if [ -z "$category" ] || [ -z "$filename" ]; then
         print_error "Category and filename are required"
         echo "Usage: ./build.sh new-post [category] [filename]"
-        echo "Categories: thoughts, travel-food"
+        echo "Categories: thoughts, travel-food, tech"
         exit 1
     fi
     
     # Validate category
-    if [ "$category" != "thoughts" ] && [ "$category" != "travel-food" ]; then
-        print_error "Invalid category. Use 'thoughts' or 'travel-food'"
+    if [ "$category" != "thoughts" ] && [ "$category" != "travel-food" ] && [ "$category" != "tech" ]; then
+        print_error "Invalid category. Use 'thoughts', 'travel-food', or 'tech'"
         exit 1
     fi
     

@@ -34,13 +34,15 @@ website/
     │   └── blog_post_template.html
     ├── posts/                  # Blog posts organized by category
     │   ├── thoughts/           # Personal thoughts and experiences
-    │   └── travel-food/        # Travel and food content
+    │   ├── travel-food/        # Travel and food content
+    │   └── tech/               # Technology and development content
     ├── microblog/              # Microblog content (HTML)
     └── markdown/               # Markdown source files
         ├── microblog/          # Microblog entries in markdown
         └── posts/              # Blog posts in markdown
             ├── thoughts/       # Thoughts posts in markdown
-            └── travel-food/    # Travel-food posts in markdown
+            ├── travel-food/    # Travel-food posts in markdown
+            └── tech/           # Tech posts in markdown
 ```
 
 ## 📋 Available Commands
@@ -93,6 +95,7 @@ The `build.sh` script provides several commands to help manage the website:
 **Categories:**
 - `thoughts` - Personal thoughts and experiences
 - `travel-food` - Travel and food content
+- `tech` - Technology and development content
 
 #### Create a New Markdown Blog Post
 ```bash
@@ -102,6 +105,7 @@ The `build.sh` script provides several commands to help manage the website:
 **Categories:**
 - `thoughts` - Personal thoughts and experiences
 - `travel-food` - Travel and food content
+- `tech` - Technology and development content
 
 **Benefits of Markdown Posts:**
 - ✅ **Pandoc conversion** - Professional markdown to HTML conversion
@@ -118,6 +122,10 @@ The `build.sh` script provides several commands to help manage the website:
 # Create a new travel-food post
 ./build.sh new-post travel-food restaurant-review
 # Generates title: "Restaurant Review"
+
+# Create a new tech post
+./build.sh new-post tech javascript-tutorial
+# Generates title: "Javascript Tutorial"
 
 # Filename with underscores and hyphens
 ./build.sh new-post thoughts my_daily_reflection
@@ -163,7 +171,7 @@ Automatically rebuilds all index files by scanning existing HTML posts. This is 
 **What it does:**
 - ✅ Scans `public/posts/` directories for existing HTML files
 - ✅ Extracts titles and dates from HTML files
-- ✅ Rebuilds main index, thoughts index, and travel-food index
+- ✅ Rebuilds main index, thoughts index, travel-food index, and tech index
 - ✅ Removes references to deleted posts
 - ✅ Maintains proper HTML structure and navigation
 
@@ -192,22 +200,6 @@ Automatically rebuilds all index files by scanning existing HTML posts. This is 
 ./build.sh build-all
 
 # Your website is now fully updated and ready!
-```
-
-```mermaid
-flowchart TD
-    A(["Start"]) --> B{"Arg == &quot;build-all&quot;?"};
-    B -->|No| H1["Show help text"];
-    H1 --> Z(["End"]);
-    B -->|Yes| C["Print &quot;Starting one-click build...&quot;"];
-    C --> D["Step 1: clean_files<br/>• Remove .DS_Store<br/>• Remove *.bak and *~ under public/"];
-    D --> E["Step 2: build_microblog<br/>• Read public/markdown/microblog/*.md<br/>• Sort newest→oldest<br/>• Group by year/month<br/>• Render entries into public/microblog/microblog.html"];
-    E --> F["Step 3: build_posts<br/>• For categories: thoughts, travel-food<br/>• Read public/markdown/posts/&lt;cat&gt;/*.md<br/>• Extract title &amp; description<br/>• Emit HTML to public/posts/&lt;cat&gt;/&lt;post&gt;.html"];
-    F --> G["Step 4: rebuild_indexes<br/>• Rebuild public/posts/thoughts/index.html<br/>• Rebuild public/posts/travel-food/index.html<br/>• Rebuild main public/index.html &#40;recent links, etc.&#41;"];
-    G --> I["Step 5: inject_navigation<br/>• Pick nav-root / nav-level1 / nav-level2 by path depth<br/>• Inject into &lt;nav&gt; of every HTML under public/"];
-    I --> J["Inject_footer<br/>• Inject footer component<br/>• Fix relative asset paths by depth"];
-    J --> K["Print success + tip to run &quot;./build.sh deploy&quot;"];
-    K --> Z;
 ```
 
 #### Inject Navigation into All Pages
@@ -248,9 +240,9 @@ Automatically injects the footer component into all HTML pages with correct rela
 - To ensure consistent footer across all pages
 
 **Navigation Components:**
-- `public/components/nav-root.html` - For root level pages
+- `public/components/nav-root.html` - For root level pages (index.html)
 - `public/components/nav-level1.html` - For microblog pages
-- `public/components/nav-level2.html` - For posts pages
+- `public/components/nav-level2.html` - For posts pages (thoughts, travel-food, tech)
 
 #### Validate HTML Structure
 ```bash
@@ -296,9 +288,31 @@ Displays all available commands and usage examples.
 ## 📝 Creating New Content
 
 ### Blog Posts
+
+#### Creating Posts by Category
+
+**Thoughts Posts** - Personal reflections and experiences:
+```bash
+./build.sh new-post thoughts my-daily-reflection
+./build.sh new-post-md thoughts my-daily-reflection
+```
+
+**Travel & Food Posts** - Travel experiences and food reviews:
+```bash
+./build.sh new-post travel-food jeju-coffee-shop
+./build.sh new-post-md travel-food jeju-coffee-shop
+```
+
+**Tech Posts** - Programming, development tools, and technology:
+```bash
+./build.sh new-post tech javascript-tutorial
+./build.sh new-post-md tech javascript-tutorial
+```
+
+#### Post Creation Process
 1. Use the build script to create a new post:
    ```bash
-   ./build.sh new-post thoughts my-post-name
+   ./build.sh new-post [category] [filename]
    ```
 
 2. The script automatically:
@@ -492,6 +506,9 @@ This ensures all pages have consistent navigation with correct relative paths fo
 - **Components**: Reusable HTML components in `public/components/`
 - **Templates**: HTML templates in `public/templates/`
 - **Content**: Blog posts organized by category in `public/posts/`
+  - `thoughts/` - Personal thoughts and experiences
+  - `travel-food/` - Travel and food content  
+  - `tech/` - Technology and development content
 
 ### Path Structure
 - All paths use relative references for Neocities compatibility
@@ -505,6 +522,9 @@ This ensures all pages have consistent navigation with correct relative paths fo
 - **Component-based**: Reusable navigation and footer
 - **SEO Optimized**: Proper meta tags and structure
 - **Accessibility**: Alt attributes and semantic HTML
+- **Multi-category Blog**: Organized content in thoughts, travel-food, and tech categories
+- **Markdown Support**: Professional markdown conversion with Pandoc
+- **Automated Build System**: One-command website updates
 
 ## 🐛 Troubleshooting
 
