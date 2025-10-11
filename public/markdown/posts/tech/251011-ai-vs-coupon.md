@@ -22,7 +22,7 @@
 평소 사용하던 것처럼 `Quick Response` (빠른 답변) 모드로 설정하고 위의 질문을 물어보았다.
 
 <figure>
-    <img src="./pics/copilot.png" alt="Copilot의 답변. 완전히 틀렸다!" style="max-width:100%; height:auto;">
+    <img src="./pics/ai-vs-coupon/copilot.png" alt="Copilot의 답변. 완전히 틀렸다!" style="max-width:100%; height:auto;">
     <figcaption>Copilot의 답변, 완전히 틀렸다!</figcaption>
 </figure>
 
@@ -136,7 +136,7 @@ Business 플랜을 구독한 상태에서, GPT-5를 `Auto`로 설정하여("생�
 질문의 의도를 정확히 파악하여 매우 좋은 품질의 답변을 작성해주었다. 심지어 `mermaid`를 활용해 아래와 같은 플로우차트까지 그려주었다!
 
 <figure>
-    <img src="./pics/flowchart.png" alt="GLM-4.6이 그린 플로우차트" style="max-width:100%; height:auto;">
+    <img src="./pics/ai-vs-coupon/flowchart.png" alt="GLM-4.6이 그린 플로우차트" style="max-width:100%; height:auto;">
     <figcaption>GLM-4.6이 그린 플로우차트. 이해가 쏙쏙 된다!</figcaption>
 </figure>
 
@@ -148,7 +148,7 @@ Business 플랜을 구독한 상태에서, GPT-5를 `Auto`로 설정하여("생�
 웹 검색에 특화된 AI 서비스로 유명한 퍼플렉시티의 답변은 어떨까? 별도로 모델 설정은 하지 않고 "자동" 설정으로 돌렸다.
 
 <figure>
-    <img src="./pics/perplexity.png" alt="Perplexity의 답변" style="max-width:100%; height:auto;">
+    <img src="./pics/ai-vs-coupon/perplexity.png" alt="Perplexity의 답변" style="max-width:100%; height:auto;">
     <figcaption>Perpelxity의 답변. 완전히 틀렸다!</figcaption>
 </figure>
 
