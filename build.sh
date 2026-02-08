@@ -219,8 +219,42 @@ EOF
     local current_year=""
     local current_month=""
     
-    # Find all markdown files and sort by date (newest first)
-    find "$markdown_dir" -name "*.md" -not -name "template.md" | sort -r | while read -r markdown_file; do
+    # First, collect all files with their dates and sort by date (newest first)
+    local sort_file=$(mktemp)
+    find "$markdown_dir" -name "*.md" -not -name "template.md" | while read -r markdown_file; do
+        local basename=$(basename "$markdown_file" .md)
+        local date=""
+        local year=""
+        local month=""
+        local day=""
+        local sortable_date=""
+        
+        # Try YYYY-MM-DD format first
+        date=$(echo "$basename" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' || echo "")
+        if [ -n "$date" ]; then
+            year=$(echo "$date" | cut -d'-' -f1)
+            month=$(echo "$date" | cut -d'-' -f2)
+            day=$(echo "$date" | cut -d'-' -f3)
+            sortable_date="${year}${month}${day}"
+        else
+            # Try YYMMDD format (6 digits)
+            local yymmdd=$(echo "$basename" | grep -o '^[0-9]\{6\}' || echo "")
+            if [ -n "$yymmdd" ]; then
+                year="20$(echo "$yymmdd" | cut -c1-2)"
+                month=$(echo "$yymmdd" | cut -c3-4)
+                day=$(echo "$yymmdd" | cut -c5-6)
+                sortable_date="${year}${month}${day}"
+            fi
+        fi
+        
+        # Only include files with valid dates
+        if [ -n "$sortable_date" ]; then
+            echo "${sortable_date}|${markdown_file}" >> "$sort_file"
+        fi
+    done
+    
+    # Sort by date in reverse order (newest first) and process
+    sort -r "$sort_file" | cut -d'|' -f2 | while read -r markdown_file; do
         local basename=$(basename "$markdown_file" .md)
         local date=""
         local year=""
@@ -265,6 +299,9 @@ EOF
             pandoc -f markdown -t html --syntax-highlighting=none "$markdown_file" >> "$temp_file"
         fi
     done
+    
+    # Clean up temporary sort file
+    rm -f "$sort_file"
     
     # Add HTML footer
     cat >> "$temp_file" << 'EOF'
